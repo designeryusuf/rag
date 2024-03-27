@@ -162,7 +162,7 @@ export default function ChatBot() {
                 <button
                   onClick={() => sendCustomMessage("How can I help you?")}
                 >
-                  How can I help you?
+                  Tell me about sterling bank?
                 </button>
               </div>
               <div className="bg-white border border-[#D92228] w-fit px-4 py-3 text-black text-sm rounded-3xl  ">
