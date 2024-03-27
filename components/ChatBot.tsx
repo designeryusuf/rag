@@ -160,7 +160,7 @@ export default function ChatBot() {
             >
               <div className="bg-white border border-[#D92228] w-fit px-4 py-3 text-black text-sm rounded-3xl  ">
                 <button
-                  onClick={() => sendCustomMessage("How can I help you?")}
+                  onClick={() => sendCustomMessage("Tell me about sterling bank?")}
                 >
                   Tell me about sterling bank?
                 </button>
