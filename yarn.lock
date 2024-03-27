@@ -3103,7 +3103,7 @@ playwright-core@1.42.1:
   resolved "https://registry.npmjs.org/playwright-core/-/playwright-core-1.42.1.tgz"
   integrity sha512-mxz6zclokgrke9p1vtdy/COWBH+eOZgYUVVU34C73M+4j4HLlQJHtfcqiqqxpP0o8HhMkflvfbquLX5dg6wlfA==
 
-playwright@^1.32.1, playwright@^1.42.1:
+playwright@^1.32.1:
   version "1.42.1"
   resolved "https://registry.npmjs.org/playwright/-/playwright-1.42.1.tgz"
   integrity sha512-PgwB03s2DZBcNRoW+1w9E+VkLBxweib6KTXM0M3tkiT4jVxKSi6PmVJ591J+0u10LUrgxB7dLRbiJqO5s2QPMg==
@@ -3247,7 +3247,7 @@ puppeteer-core@19.11.1:
     unbzip2-stream "1.4.3"
     ws "8.13.0"
 
-puppeteer@^19.11.1, puppeteer@^19.7.2:
+puppeteer@^19.7.2:
   version "19.11.1"
   resolved "https://registry.npmjs.org/puppeteer/-/puppeteer-19.11.1.tgz"
   integrity sha512-39olGaX2djYUdhaQQHDZ0T0GwEp+5f9UB9HmEP0qHfdQHIq0xGQZuAZ5TLnJIc/88SrPLpEflPC+xUqOTv3c5g==

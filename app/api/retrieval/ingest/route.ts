@@ -5,8 +5,8 @@ import { CheerioWebBaseLoader } from "langchain/document_loaders/web/cheerio";
 import { createClient } from "@supabase/supabase-js";
 import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-import { PuppeteerWebBaseLoader } from "langchain/document_loaders/web/puppeteer";
-import { PlaywrightWebBaseLoader } from "langchain/document_loaders/web/playwright";
+
+
 export const runtime = "edge";
 
 export async function POST(req: NextRequest) {
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
       process.env.SUPABASE_PRIVATE_KEY!,
     );
 
-    const loader = new PlaywrightWebBaseLoader("https://sterling.ng/");
+    const loader = new CheerioWebBaseLoader("https://sterling.ng/");
 
     const docs = await loader.load();
     console.log(docs);
