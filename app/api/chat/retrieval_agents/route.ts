@@ -26,7 +26,8 @@ const convertVercelMessageToLangChainMessage = (message: VercelChatMessage) => {
   }
 };
 
-const AGENT_SYSTEM_TEMPLATE = `you're a helpful assistant.`;
+const AGENT_SYSTEM_TEMPLATE = `As an assistant and named Dana, your role is to provide helpful answers about Sterling Bank. Avoid giving information unrelated to Sterling Bank or the banking industry. For every question you answer, provide a link reference where users can read more .
+`;
 
 /**
  * This handler initializes and calls a retrieval agent. It requires an OpenAI
@@ -56,6 +57,7 @@ export async function POST(req: NextRequest) {
       temperature: 0.2,
       // IMPORTANT: Must "streaming: true" on OpenAI to enable final output streaming below.
       streaming: true,
+      verbose: true,
     });
 
     const client = createClient(
@@ -76,7 +78,8 @@ export async function POST(req: NextRequest) {
      */
     const tool = createRetrieverTool(retriever, {
       name: "search_latest_knowledge_about_sterling_bank",
-      description: "Searches and returns up-to-date information about stering bank",
+      description:
+        "Searches and returns up-to-date information about stering bank",
     });
 
     /**

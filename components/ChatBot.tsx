@@ -30,7 +30,9 @@ export default function ChatBot() {
   });
 
   useEffect(() => {
-    chatContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const inputButtons = [
@@ -80,6 +82,15 @@ export default function ChatBot() {
       target: { value: message, name: "input" },
     } as React.ChangeEvent<HTMLInputElement>);
   };
+
+  const formatResponse = (response: string) => {
+    const formattedText = response.split("\n").map((part, index) => (
+      <p key={index}>{part.trim()}</p>
+    ));
+
+    return formattedText;
+  };
+  
 
   return (
     <div>
@@ -149,7 +160,8 @@ export default function ChatBot() {
                       : "bg-white text-black"
                   }`}
                 >
-                  {message.content}
+                
+                  {formatResponse(message.content)}
                 </div>
               ))}
             </div>
