@@ -3,7 +3,7 @@ import ChatBot from '@/components/ChatBot'
 
 function Home() {
   return (
-    <div>Home
+    <div>
       <ChatBot />
     </div>
   )
