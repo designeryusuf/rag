@@ -5,6 +5,7 @@ import { CheerioWebBaseLoader } from "langchain/document_loaders/web/cheerio";
 import { createClient } from "@supabase/supabase-js";
 import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { Chroma } from "langchain/vectorstores/chroma";
 
 export const runtime = "edge";
 
@@ -288,7 +289,7 @@ export async function POST(req: NextRequest) {
     );
 
     const splitter = RecursiveCharacterTextSplitter.fromLanguage("markdown", {
-      chunkSize: 256,
+      chunkSize: 1000,
       chunkOverlap: 20,
     });
 
