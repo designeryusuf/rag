@@ -292,6 +292,7 @@ export async function POST(req: NextRequest) {
       chunkSize: 1000,
       chunkOverlap: 20,
     });
+    
 
     const splitDocuments = await splitter.createDocuments([text]);
 
