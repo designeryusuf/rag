@@ -9,6 +9,7 @@ import { CiFaceSmile } from "react-icons/ci";
 import { IoIosAttach } from "react-icons/io";
 import { useChat } from "ai/react";
 import toast from "react-hot-toast";
+import ReactMarkdown from "react-markdown";
 
 export default function ChatBot() {
   const [active, setActive] = useState(false);
@@ -31,51 +32,10 @@ export default function ChatBot() {
 
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
-
-  const inputButtons = [
-    { icon: <CiFaceSmile />, link: "" },
-    { icon: <IoIosAttach />, link: "" },
-  ];
-
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const handleFileButtonClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = async () => {
-    const selectedFile = fileInputRef.current?.files?.[0];
-
-    if (selectedFile && selectedFile.type === "application/pdf") {
-      setUploading(true);
-
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-
-      try {
-        const response = await fetch("/api/parse", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          console.log("File uploaded successfully. Server response:", data);
-        } else {
-          console.error("File upload failed");
-        }
-      } catch (error) {
-        console.error("Error uploading file:", error);
-      }
-
-      setUploading(false);
-    } else {
-      console.error("Please select a PDF file.");
-    }
-  };
 
   const sendCustomMessage = (message: string) => {
     handleInputChange({
@@ -83,18 +43,8 @@ export default function ChatBot() {
     } as React.ChangeEvent<HTMLInputElement>);
   };
 
-  const formatResponse = (response: string) => {
-    const formattedText = response.split("\n").map((part, index) => (
-      <p key={index}>{part.trim()}</p>
-    ));
-
-    return formattedText;
-  };
-  
-
   return (
     <div>
-     
       <button
         className="fixed bottom-4 right-10 bg-[#D92228] rounded-full h-14 w-14 text-white shadow-xl flex justify-center items-center"
         onClick={() => setActive(!active)}
@@ -154,14 +104,13 @@ export default function ChatBot() {
               {messages.map((message, idx) => (
                 <div
                   key={idx}
-                  className={`w-fit px-4 py-3 text-black text-sm rounded-3xl ${
+                  className={`w-fit px-4 py-2 text-black text-sm rounded-3xl ${
                     message.role === "user"
                       ? "self-end bg-[#D92228] text-white"
                       : "bg-white text-black"
                   }`}
                 >
-                
-                  {formatResponse(message.content)}
+                  <ReactMarkdown children={message.content} />
                 </div>
               ))}
             </div>
@@ -172,7 +121,9 @@ export default function ChatBot() {
             >
               <div className="bg-white border border-[#D92228] w-fit px-4 py-3 text-black text-sm rounded-3xl  ">
                 <button
-                  onClick={() => sendCustomMessage("Tell me about sterling bank?")}
+                  onClick={() =>
+                    sendCustomMessage("Tell me about sterling bank?")
+                  }
                 >
                   Tell me about sterling bank?
                 </button>
@@ -191,7 +142,6 @@ export default function ChatBot() {
                   How can I help you?
                 </button>
               </div>
-              
             </div>
           )}
 

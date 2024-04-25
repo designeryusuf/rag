@@ -21,7 +21,7 @@ export default function RootLayout({
         <meta property="og:title" content="" />
         <meta
           property="og:description"
-          content="Starter template showing how to use LangChain in Next.js projects. See source code and deploy your own at https://github.com/langchain-ai/langchain-nextjs-template!"
+          content=""
         />
         <meta property="og:image" content="" />
         <meta name="twitter:card" content="summary_large_image" />
