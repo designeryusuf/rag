@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Plus, MessageSquare, ChevronDown, CircleX } from "lucide-react";
 import Image from "next/image";
-import bot from "public/images/bot.jpg";
+import bot from "../public/images/bot.jpg";
 import { IoSend } from "react-icons/io5";
 import { CiFaceSmile } from "react-icons/ci";
 import { IoIosAttach } from "react-icons/io";
@@ -110,7 +110,7 @@ export default function ChatBot() {
                       : "bg-white text-black"
                   }`}
                 >
-                  <ReactMarkdown children={message.content} />
+                  <ReactMarkdown>{message.content}</ReactMarkdown>
                 </div>
               ))}
             </div>
