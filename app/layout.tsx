@@ -13,7 +13,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title></title>
-        <link rel="shortcut icon" href="/images/favicon.ico" />
+        <link rel="shortcut icon" href="/images/bank.jpg" />
         <meta
           name="description"
           content=""

@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Plus, MessageSquare, ChevronDown, CircleX } from "lucide-react";
 import Image from "next/image";
-import bot from "../public/images/bot.jpg";
+import bot from "../public/images/bank.jpg";
 import { IoSend } from "react-icons/io5";
 import { CiFaceSmile } from "react-icons/ci";
 import { IoIosAttach } from "react-icons/io";
@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import ReactMarkdown from "react-markdown";
 
 export default function ChatBot() {
-  const [active, setActive] = useState(false);
+  // const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -52,23 +52,23 @@ export default function ChatBot() {
               <Image src={bot} alt="bot icon" layout="fill" objectFit="cover" />
             </div>
             <div className="ml-3">
-              <p className="text-lg font-bold">Chat with Us</p>
-              <p className="text-sm">24/7 Support Available</p>
+              <p className="text-lg font-bold">Chat with Naya</p>
+              <p className="text-sm">Naya is an AI-assistant</p>
             </div>
           </div>
-          <button
+          {/* <button
             onClick={() => setActive(!active)}
             className="text-black hover:text-gray-800 focus:outline-none"
           >
             {open ? <CircleX size={24} /> : <ChevronDown size={24} />}
-          </button>
+          </button> */}
         </div>
 
         {open && (
           <div className="p-3 bg-[#D92228] absolute">
             <p className="text-white text-[.79rem] text-center">
-              Thank you for contacting Access More. Your privacy, security, and
-              data are important to us and will only be used for the purpose of
+              Thank you for contacting Naya. Your privacy, security, and data
+              are important to us and will only be used for the purpose of
               providing better service to you. Please be assured that we will
               keep your personal information in strict confidence.
             </p>
@@ -106,20 +106,32 @@ export default function ChatBot() {
             <div className="bg-white border border-[#D92228] w-fit px-4 py-3 text-black text-sm rounded-3xl  ">
               <button
                 onClick={() =>
-                  sendCustomMessage("Tell me about sterling bank?")
+                  sendCustomMessage("⁠What services does Sterling Bank offer?")
                 }
               >
-                Tell me about sterling bank?
+                ⁠What services does Sterling Bank offer?
               </button>
             </div>
             <div className="bg-white border border-[#D92228] w-fit px-4 py-3 text-black text-sm rounded-3xl  ">
-              <button onClick={() => sendCustomMessage("How can I help you?")}>
-                How can I help you?
+              <button
+                onClick={() =>
+                  sendCustomMessage(
+                    "⁠How can I open an account with Sterling Bank?",
+                  )
+                }
+              >
+                ⁠How can I open an account with Sterling Bank?
               </button>
             </div>
             <div className="bg-white border border-[#D92228] w-fit px-4 py-3 text-black text-sm rounded-3xl  ">
-              <button onClick={() => sendCustomMessage("How can I help you?")}>
-                How can I help you?
+              <button
+                onClick={() =>
+                  sendCustomMessage(
+                    "How do I apply for a loan at Sterling Bank?",
+                  )
+                }
+              >
+                How do I apply for a loan at Sterling Bank?
               </button>
             </div>
           </div>
