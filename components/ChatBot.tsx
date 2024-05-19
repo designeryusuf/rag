@@ -43,6 +43,14 @@ export default function ChatBot() {
     } as React.ChangeEvent<HTMLInputElement>);
   };
 
+   const formatResponse = (responseToFormat: string) => {
+    const formattedText = responseToFormat
+      .split("\n")
+      .map((part, index) => <p key={index}>{part.trim()}</p>);
+
+    return formattedText;
+  };
+
   return (
     <div>
       <div className="fixed  bg-slate-100 rounded-2xl h-full w-full shadow-2xl ">
@@ -94,7 +102,7 @@ export default function ChatBot() {
                     : "bg-white text-black"
                 }`}
               >
-                <ReactMarkdown>{message.content}</ReactMarkdown>
+                {formatResponse(message.content)}
               </div>
             ))}
           </div>
