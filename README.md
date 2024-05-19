@@ -1,1 +1,1 @@
-Sterling bank's assistant
+AI Assistant
