@@ -17,7 +17,7 @@ export default function ChatBot() {
   const [uploading, setUploading] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  const {
+  let {
     messages,
     input,
     handleInputChange,
@@ -35,7 +35,16 @@ export default function ChatBot() {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
+
+   
   }, [messages]);
+  
+  if (!chatEndpointIsLoading && messages.length !== 0) {
+    localStorage.setItem("messages", JSON.stringify(messages));
+    
+  }
+
+  // console.log(messages);
 
   const sendCustomMessage = (message: string) => {
     handleInputChange({
@@ -43,11 +52,50 @@ export default function ChatBot() {
     } as React.ChangeEvent<HTMLInputElement>);
   };
 
-   const formatResponse = (responseToFormat: string) => {
-    const formattedText = responseToFormat
-      .split("\n")
-      .map((part, index) => <p key={index}>{part.trim()}</p>);
-
+  const formatResponse = (responseToFormat: string) => {
+    const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g;
+    const boldRegex = /\*\*([^*]+)\*\*/g;
+  
+    const formattedText = responseToFormat.split("\n").map((part, index) => {
+      const elements = [];
+      let lastIndex = 0;
+  
+      // Process links first
+      part.replace(linkRegex, (match, text, url, offset) => {
+        // Push the text before the link
+        if (offset > lastIndex) {
+          elements.push(part.substring(lastIndex, offset));
+        }
+        // Push the link as an anchor element
+        elements.push(<a key={url} href={url} target="_blank" rel="noopener noreferrer" className="text-[#D92228]">{text}</a>);
+        lastIndex = offset + match.length;
+        return match; // Return the match to satisfy the replace function
+      });
+  
+      // Handle remaining text after processing links
+      if (lastIndex < part.length) {
+        part = part.substring(lastIndex);
+        lastIndex = 0;
+  
+        // Process bold text within the remaining part
+        part.replace(boldRegex, (match, boldText, offset) => {
+          if (offset > lastIndex) {
+            elements.push(part.substring(lastIndex, offset));
+          }
+          elements.push(<strong key={index + boldText}>{boldText}</strong>);
+          lastIndex = offset + match.length;
+          return match;
+        });
+  
+        // Push any remaining text after the last bold text
+        if (lastIndex < part.length) {
+          elements.push(part.substring(lastIndex));
+        }
+      }
+  
+      return <p key={index} className="mb-1">{elements}</p>;
+    });
+  
     return formattedText;
   };
 
