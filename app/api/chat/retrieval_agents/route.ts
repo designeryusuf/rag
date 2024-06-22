@@ -14,6 +14,7 @@ import {
   ChatPromptTemplate,
   MessagesPlaceholder,
 } from "@langchain/core/prompts";
+import { authMiddleware } from "../../middleware/authMiddleware";
 
 export const runtime = "edge";
 
@@ -65,6 +66,11 @@ Note: For every question you answer, provide a link reference where users can re
  */
 export async function POST(req: NextRequest) {
   try {
+
+    if (!await authMiddleware(req)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const body = await req.json();
     
     const messages = (body.messages ?? []).filter(
@@ -78,7 +84,7 @@ export async function POST(req: NextRequest) {
     const currentMessageContent = messages[messages.length - 1].content;
 
     const chatModel = new ChatOpenAI({
-      modelName: "gpt-4",
+      modelName: "gpt-4o",
       temperature: 0.2,
       // IMPORTANT: Must "streaming: true" on OpenAI to enable final output streaming below.
       streaming: true,

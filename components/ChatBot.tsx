@@ -25,6 +25,9 @@ export default function ChatBot() {
     isLoading: chatEndpointIsLoading,
   } = useChat({
     api: "../api/chat/retrieval_agents",
+    headers: {
+      "x-api-key": "sk-lf-84217faa-4041-8de5-69dd3cb09f7b",
+    },
     onError: (e) => {
       toast.error(e.message);
     },

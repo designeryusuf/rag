@@ -6,7 +6,7 @@ import { createClient } from "@supabase/supabase-js";
 import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { Chroma } from "langchain/vectorstores/chroma";
-
+import { authMiddleware } from "../../middleware/authMiddleware";
 export const runtime = "edge";
 
 // export async function POST(req: NextRequest) {
@@ -278,6 +278,11 @@ export const runtime = "edge";
 // vector();
 
 export async function POST(req: NextRequest) {
+  
+  if (!await authMiddleware(req)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const body = await req.json();
   const text = body.text;
   console.log(text);
@@ -295,6 +300,8 @@ export async function POST(req: NextRequest) {
     
 
     const splitDocuments = await splitter.createDocuments([text]);
+
+    console.log(splitDocuments);
 
     const vectorstore = await SupabaseVectorStore.fromDocuments(
       splitDocuments,
