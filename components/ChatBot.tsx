@@ -11,6 +11,7 @@ import { useChat } from "ai/react";
 import toast from "react-hot-toast";
 import ReactMarkdown from "react-markdown";
 
+
 export default function ChatBot() {
   // const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
