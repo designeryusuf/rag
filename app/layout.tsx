@@ -28,7 +28,7 @@ export default function RootLayout({
         <meta name="twitter:title" content="" />
         <meta
           name="twitter:description"
-          content=""
+          content="Sterling Bank"
         />
         <meta name="twitter:image" content="" />
       </head>
